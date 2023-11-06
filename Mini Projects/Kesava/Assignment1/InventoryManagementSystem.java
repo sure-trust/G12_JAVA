@@ -1,3 +1,14 @@
+/* Features::
+ * 1.
+Ability to read Supply details from a CSV file and save in Database ( Supply table)
+2.
+Ability to ready Demand details from CSV file and save in Database ( Demand Details table)
+3.
+Ability to calculate Inventory level given a Product code as input
+4.
+Calculate Inventory level for all items in database and generate CSV file
+ */
+
 import java.sql.*;
 import java.util.*;
 import java.io.*;
@@ -20,8 +31,8 @@ public class InventoryManagementSystem {
         }
 
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
+            //To call methods getting values from user 
             System.out.println("Enter 1 for Supply Details Load from CSV File");
             System.out.println("Enter 2 for Demand Details Load from CSV File");
             System.out.println("Enter 3 for Getting Inventory Level for One Product");
@@ -29,7 +40,7 @@ public class InventoryManagementSystem {
             System.out.println("Enter 5 to Exit");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1:
@@ -57,11 +68,11 @@ public class InventoryManagementSystem {
                     }
                     System.exit(0);
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. Please try again next time.");
             }
         }
     }
-
+// To Load Supply details from the csv file
     static void loadSupplyDetailsFromCSV() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("Supply.csv"));
@@ -75,15 +86,15 @@ public class InventoryManagementSystem {
 
                 String sql = "INSERT INTO Supply (Product_code, Location, Supply_quantity, Supply_date) " +
                              "VALUES ('" + productCode + "', '" + location + "', " + supplyQuantity + ", '" + supplyDate + "')";
-
                 stmt.executeUpdate(sql);
             }
-            System.out.println("Supply details loaded successfully.");
+            System.out.println("Supply details loaded successfully and inserted the data in the database.");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
 
+    //To load Demand details from the csv file
     static void loadDemandDetailsFromCSV() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("Demand.csv"));
@@ -100,12 +111,13 @@ public class InventoryManagementSystem {
 
                 stmt.executeUpdate(sql);
             }
-            System.out.println("Demand details loaded successfully.");
+            System.out.println("Demand details loaded successfully and inserted the data in the database.");
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
 
+    //To calculate Inventory level 
     static void calculateInventoryLevel(String productCode) {
         try {
             String sql = "SELECT SUM(Supply_Quantity) AS TotalSupply FROM Supply WHERE Product_code = '" + productCode + "'";
@@ -126,6 +138,7 @@ public class InventoryManagementSystem {
         }
     }
 
+    //To Generate Inventory level csv 
     static void generateInventoryLevelCSV() {
         try {
             String sql = "SELECT Product_code, (SUM(Supply_Quantity) - SUM(Demand_Qty)) AS Inventory_Level " +
