@@ -1,3 +1,4 @@
+
 <!-- PROJECT LOGO -->
 <br />
 
@@ -23,9 +24,9 @@ Below is a table summarizing the mini projects and final project completed durin
 
 | Description                                      | Link                                    |
 |--------------------------------------------------|-----------------------------------------|
-| Mini Projects:1.INVENTORY MANAGEMENT SYSTEM      |[click here](https://github.com/dandumounika1/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment1)
- 2.VEHICLE BOOKING SYSTEM                          |[click here](https://github.com/dandumounika1/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment2)
- 3.FOODDISTRIBUTIONSYSTEM                          |[click here](https://github.com/dandumounika1/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment3)		
- 4.INSURANCE MANAGEMENT SYSTEM                     |[click here](https://github.com/dandumounika1/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment%204) 
+| Mini Projects:1.INVENTORY MANAGEMENT SYSTEM      |[click here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment1)
+ 2.VEHICLE BOOKING SYSTEM                          |[click here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment2)
+ 3.FOODDISTRIBUTIONSYSTEM                          |[click here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment3)		
+ 4.INSURANCE MANAGEMENT SYSTEM                     |[click here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Mounika/Assignment%204) 
                       			|
-|Final Project:Newspaper Agency Automation Software|[click here](https://github.com/dandumounika1/G12_JAVA/tree/main/Final%20Capstone%20Project/Mounika)
+|Final Project:Newspaper Agency Automation Software|[click here](https://github.com/sure-trust/G12_JAVA/tree/main/Final%20Capstone%20Project/Mounika)
