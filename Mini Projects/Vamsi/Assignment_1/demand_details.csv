@@ -1,0 +1,5 @@
+product_code,location,demand_quantity,demand_date
+123456,store,30,20/02
+123457,store,20,21/02
+123458,online,1,22/02
+123459,online,3,23/02

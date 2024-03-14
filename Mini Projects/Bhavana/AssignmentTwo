@@ -1,0 +1,199 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+class VehicleInfo {
+    String regNumber;
+    String vehicleType;
+    String brand;
+    int seatingCapacity;
+    int totalTrips;
+    double totalTravelledDistance;
+
+    VehicleInfo(String regNumber, String vehicleType, String brand, int seatingCapacity) {
+        this.regNumber = regNumber;
+        this.vehicleType = vehicleType;
+        this.brand = brand;
+        this.seatingCapacity = seatingCapacity;
+        this.totalTrips = 0;
+        this.totalTravelledDistance = 0;
+    }
+}
+
+class JourneyInfo {
+    String vehicleRegNumber;
+    double startDistance;
+    double endDistance;
+
+    JourneyInfo(String vehicleRegNumber, double startDistance, double endDistance) {
+        this.vehicleRegNumber = vehicleRegNumber;
+        this.startDistance = startDistance;
+        this.endDistance = endDistance;
+    }
+}
+
+public class VehicleBookingApp {
+    static List<VehicleInfo> vehicleList = new ArrayList<>();
+    static List<JourneyInfo> journeyList = new ArrayList<>();
+    static Connection dbConnection;
+
+    public static void main(String[] args) {
+        // Initialize the database connection
+        connectToDatabase();
+
+
+        Scanner userInput = new Scanner(System.in);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+        while (true) {
+            System.out.println("Press 1 to Register a Vehicle");
+            System.out.println("Press 2 to Request Vehicle Allocation");
+            System.out.println("Press 3 for Multiple Allocation Requests in Parallel");
+            System.out.println("Press 4 for Vehicle Usage Report");
+            System.out.println("Press 5 for CSV Report");
+            System.out.println("Press 0 to Exit");
+            int userChoice = userInput.nextInt();
+            switch (userChoice) {
+                case 1:
+                    registerNewVehicle(userInput);
+                    break;
+                case 2:
+                    requestVehicleAllocation(userInput);
+                    break;
+                case 3:
+                    parallelVehicleAllocation(executorService, userInput);
+                    break;
+                case 4:
+                    generateUsageReport();
+                    break;
+                case 0:
+                    executorService.shutdown();
+                    disconnectFromDatabase();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static void connectToDatabase() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            // Replace the placeholders with your actual database information
+            String url = "jdbc:mysql://localhost:3306/VehicleBookingSystem";
+            String username = "root";
+            String password = "";
+            dbConnection = DriverManager.getConnection(url, username, password);
+
+            // Create tables if not exists
+            createDatabaseTables();
+        } catch (SQLException | ClassNotFoundException e) {
+            System.err.println("Error connecting to the database: " + e.getMessage());
+            e.printStackTrace();
+            System.exit(1); // Exit the program in case of a database connection error
+        }
+    }
+
+    private static void createDatabaseTables() throws SQLException {
+        try (Statement dbStatement = dbConnection.createStatement()) {
+            // Vehicle table
+            dbStatement.execute("CREATE TABLE IF NOT EXISTS vehicles (" +
+                    "regNumber VARCHAR(50) PRIMARY KEY," +
+                    "vehicleType VARCHAR(50)," +
+                    "brand VARCHAR(50)," +
+                    "seatingCapacity INT," +
+                    "totalTrips INT," +
+                    "totalTravelledDistance DOUBLE)");
+
+            // Journey table
+            dbStatement.execute("CREATE TABLE IF NOT EXISTS journeys (" +
+                    "id INT AUTO_INCREMENT PRIMARY KEY," +
+                    "vehicleRegNumber VARCHAR(50)," +
+                    "startDistance DOUBLE," +
+                    "endDistance DOUBLE)");
+        }
+    }
+
+    private static void registerNewVehicle(Scanner userInput) {
+        System.out.println("Enter Vehicle Registration Number: ");
+        String regNumber = userInput.next();
+        System.out.println("Enter Vehicle Type: ");
+        String vehicleType = userInput.next();
+        System.out.println("Enter Vehicle Brand: ");
+        String brand = userInput.next();
+        System.out.println("Enter Seating Capacity: ");
+        int seatingCapacity = userInput.nextInt();
+
+        VehicleInfo vehicleInfo = new VehicleInfo(regNumber, vehicleType, brand, seatingCapacity);
+        vehicleList.add(vehicleInfo);
+
+        try (PreparedStatement dbStatement = dbConnection.prepareStatement(
+                "INSERT INTO vehicles VALUES (?, ?, ?, ?, ?, ?)")) {
+            dbStatement.setString(1, regNumber);
+            dbStatement.setString(2, vehicleType);
+            dbStatement.setString(3, brand);
+            dbStatement.setInt(4, seatingCapacity);
+            dbStatement.executeUpdate();
+            System.out.println("Vehicle registered successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void requestVehicleAllocation(Scanner userInput) {
+        System.out.println("Enter Required Vehicle Type: ");
+        String requiredType = userInput.next();
+        System.out.println("Enter Start Distance: ");
+        double startDistance = userInput.nextDouble();
+        System.out.println("Enter End Distance: ");
+        double endDistance = userInput.nextDouble();
+
+        System.out.println("Vehicle allocated successfully!");
+
+        try (PreparedStatement dbStatement = dbConnection.prepareStatement(
+                "INSERT INTO journeys (vehicleRegNumber, startDistance, endDistance) VALUES (?, ?, ?)")) {
+            dbStatement.setString(1, requiredType);
+            dbStatement.setDouble(2, startDistance);
+            dbStatement.setDouble(3, endDistance);
+            dbStatement.executeUpdate();
+            System.out.println("Vehicle allocated successfully!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void parallelVehicleAllocation(ExecutorService executorService, Scanner userInput) {
+        for (int i = 0; i < 10; i++) {
+            executorService.submit(() -> requestVehicleAllocation(userInput));
+        }
+    }
+
+    private static void generateUsageReport() {
+        // Query the database to get the latest information
+        try (Statement dbStatement = dbConnection.createStatement()) {
+            ResultSet resultSet = dbStatement.executeQuery("SELECT * FROM vehicles");
+            System.out.println("Registration Number   Vehicle Type   Total Trips   Total Travelled Distance");
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("regNumber") + "   "
+                        + resultSet.getString("vehicleType") + "   "
+                        + resultSet.getInt("totalTrips") + "   "
+                        + resultSet.getDouble("totalTravelledDistance"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void disconnectFromDatabase() {
+        try {
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
