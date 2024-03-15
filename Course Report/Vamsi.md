@@ -15,7 +15,7 @@
 
 ## Qualifications: Pursuing 3rd year b.tech
 
-Welcome to the course report for the [Core Java Programming]! This README document provides an overview of the course, its mini projects and final project.
+Welcome to the course report for the **Core Java Programming** This README document provides an overview of the course, its mini projects and final project.
 
 ### Mini Projects and Final Project
 
@@ -23,14 +23,10 @@ Below is a table summarizing the mini projects and final project completed durin
 
 | Description                     | Link                                   |
 |--------------------------------|-----------------------------------------|
-| Mini Projects: 
-|[InventoryManagementSystem]    |[Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_1) \
-
-|[Vehicle_Bookings]            |[Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_2) \
-
-|[Food Distribution_system]    |[Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_3) \
-
-|[Insurance_Management_System] |[Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_4) |
-
-|Final Project: 
-|[Medicine Shop Automation]   | [Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Final%20Capstone%20Project/Vamsi/MedicineShopAutomation)   |
+| **Mini Projects:**             |                                         |
+| Inventory Management System    | [Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_1)  |
+| Vehicle Bookings               | [Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_2) |
+| Food Distribution System       | [Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_3) |
+| Insurance Management System    | [Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Mini%20Projects/Vamsi/Assignment_4) |
+| **Final Project:**             |                                         |
+| Medicine Shop Automation       | [Click Here](https://github.com/sure-trust/G12_JAVA/tree/main/Final%20Capstone%20Project/Vamsi/MedicineShopAutomation)   |
