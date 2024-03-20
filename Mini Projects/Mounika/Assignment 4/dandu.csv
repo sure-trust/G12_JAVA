@@ -1,4 +1,0 @@
-Policy_number,Policy_Type,SumInsured,PolicyMaturityDate,Claim_Status,Premium Paid Status
-12A41334,Life,250000,01/09/2025,No_Claim,Paid
-12B13424,Motor,400000,01/08/2024,Claimed,Paid
-11313434,Life,434000,01/01/2030,No_Claim,UnPaid
