@@ -21,8 +21,8 @@ To enroll in the Java Course, please visit the official SURE Trust website: [Cou
 
 |Student Name|Link|
 |------------|-----|
-|Raffi|[CLick here](https://github.com/sure-trust/G12_JAVA/blob/main/Course%20Report/Mahammed%20Raffi.md)|
-|Vamsi|[CLick here](https://github.com/sure-trust/G12_JAVA/blob/main/Course%20Report/Vamsi.md)|
+|Raffi|[Click here](https://github.com/sure-trust/G12_JAVA/blob/main/Course%20Report/Mahammed%20Raffi.md)|
+|Vamsi|[Click here](https://github.com/sure-trust/G12_JAVA/blob/main/Course%20Report/Vamsi.md)|
 
 ## Repository Description
 
