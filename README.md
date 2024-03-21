@@ -19,6 +19,11 @@ SURE Trust is a registered NGO committed to eradicating the disparity between sk
 
 To enroll in the Java Course, please visit the official SURE Trust website: [Course Registration](https://suretrustforruralyouth.com/courses/126)
 
+|Student Name|Link|
+|------------|-----|
+|Raffi|[CLick here](https://github.com/sure-trust/G12_JAVA/blob/main/Course%20Report/Mahammed%20Raffi.md)|
+|Vamsi|[CLick here](https://github.com/sure-trust/G12_JAVA/blob/main/Course%20Report/Vamsi.md)|
+
 ## Repository Description
 
 This repository is designed to support the Java - G12 program at SURE Trust. It follows the below mentioned organization structure:
